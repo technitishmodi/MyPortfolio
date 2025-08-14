@@ -10,6 +10,13 @@ export const projects: Project[] = [
     category: 'Mobile Development',
     tags: ['Flutter', 'Firebase', 'Community'],
     link: '#',
+    details: [
+      '• Cross-platform mobile app built with Flutter framework',
+      '• Real-time book sharing and community features via Firebase',
+      '• User authentication and profile management',
+      '• Book upload and download functionality',
+      '• Reading progress tracking and bookmarks'
+    ]
   },
   {
     id: '2',
@@ -18,8 +25,15 @@ export const projects: Project[] = [
       'A password manager and link management app that store the data locally.',
     imageUrl: 'https://media.istockphoto.com/id/1402450534/photo/padlock-with-keyhole-in-data-security-on-circuit-modern-safety-digital-concept.jpg?s=612x612&w=0&k=20&c=vBzRPNY53FvkckEBjRxZBm-3QTQd3bttgglFRPgYOqc=',
     category: 'Mobile Development',
-    tags: ['Flutter', 'Firebase', 'Community'],
+    tags: ['Flutter', 'Local Storage', 'Security'],
     link: '#',
+    details: [
+      '• Secure local storage for passwords and links',
+      '• AES encryption for sensitive data protection',
+      '• Biometric authentication support',
+      '• Password strength analyzer and generator',
+      '• Offline-first architecture for privacy'
+    ]
   },
   {
     id: '3',
@@ -30,6 +44,13 @@ export const projects: Project[] = [
     category: 'Mobile Development',
     tags: ['Flutter', 'OpenAI API', 'Text-to-Speech'],
     link: '#',
+    details: [
+      '• Integration with OpenAI GPT API for intelligent responses',
+      '• Text-to-speech functionality for accessibility',
+      '• Voice input recognition and processing',
+      '• Conversation history and context management',
+      '• Customizable chat themes and settings'
+    ]
   },
   {
     id: '4',
@@ -40,6 +61,13 @@ export const projects: Project[] = [
     category: 'Cybersecurity',
     tags: ['Python', 'AES', 'RSA'],
     link: '#',
+    details: [
+      '• AES-256 symmetric encryption implementation',
+      '• RSA asymmetric encryption for key exchange',
+      '• Command-line interface for easy usage',
+      '• File and text encryption/decryption support',
+      '• Secure key generation and management'
+    ]
   }
 ];
 

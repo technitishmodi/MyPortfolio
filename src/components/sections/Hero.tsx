@@ -4,41 +4,30 @@ import { Github, Linkedin, Mail, Instagram, Phone } from "lucide-react";
 
 // Floating Hacker Particles - Optimized for performance
 const HackerParticles = () => {
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    x: number;
-    y: number;
-    size: number;
-    speed: number;
-  }>>([]);
+  const [particles, setParticles] = useState<
+    Array<{ id: number; x: number; y: number; size: number; speed: number }>
+  >([]);
   const animationRef = useRef<number>();
 
   useEffect(() => {
-    // Reduced number of particles from 25 to 15
     const generated = Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       size: Math.random() * 3 + 2,
-      speed: Math.random() * 0.3 + 0.1, // Slower movement
+      speed: Math.random() * 0.3 + 0.1,
     }));
     setParticles(generated);
 
-    // Optimized animation function that doesn't recreate objects unnecessarily
     const animate = () => {
       setParticles((prev) => {
-        // Only update every other frame to reduce CPU usage
         if (Date.now() % 2 !== 0) return prev;
 
         return prev.map((p) => {
           const newY = p.y > window.innerHeight ? 0 : p.y + p.speed;
-          const newX = p.x + Math.sin(p.y / 50) * 0.3; // Reduced movement
+          const newX = p.x + Math.sin(p.y / 50) * 0.3;
 
-          return {
-            ...p,
-            y: newY,
-            x: newX,
-          };
+          return { ...p, y: newY, x: newX };
         });
       });
       animationRef.current = requestAnimationFrame(animate);
@@ -46,11 +35,8 @@ const HackerParticles = () => {
 
     animationRef.current = requestAnimationFrame(animate);
 
-    // Cleanup animation frame on unmount
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
@@ -64,7 +50,7 @@ const HackerParticles = () => {
             top: p.y,
             width: p.size,
             height: p.size,
-            willChange: 'transform', // Optimize for animation
+            willChange: "transform",
           }}
           className="absolute rounded-full bg-green-400 opacity-50"
         />
@@ -73,45 +59,63 @@ const HackerParticles = () => {
   );
 };
 
-// Boot-up Preloader
+// Boot-up Preloader (Hacker Terminal Style)
 const Preloader = ({ onFinish }: { onFinish: () => void }) => {
-  const [lines, setLines] = useState<string[]>([]);
   const bootText = [
-    "> Initializing secure connection...",
+    "> Connecting securely...",
     "> Decrypting access keys...",
-    "> Loading portfolio modules...",
-    "> Bypassing firewall...",
+    "> Loading skills and projects...",
+    "> Security check passed.",
     "> Access granted.",
   ];
 
+  const [currentLine, setCurrentLine] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [lines, setLines] = useState<string[]>([]);
+
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < bootText.length) {
-        setLines((prev) => [...prev, bootText[i]]);
-        i++;
+    let charIndex = 0;
+
+    const typeLine = () => {
+      if (charIndex < bootText[currentLine].length) {
+        setDisplayedText((prev) => prev + bootText[currentLine][charIndex]);
+        charIndex++;
+        setTimeout(typeLine, 40);
       } else {
-        clearInterval(interval);
-        setTimeout(() => onFinish(), 1000);
+        setLines((prev) => [...prev, bootText[currentLine]]);
+        setDisplayedText("");
+        setCurrentLine((prev) => prev + 1);
       }
-    }, 800);
-    return () => clearInterval(interval);
-  }, []);
+    };
+
+    if (currentLine < bootText.length) {
+      setTimeout(typeLine, 500);
+    } else {
+      setTimeout(() => onFinish(), 800);
+    }
+  }, [currentLine]);
 
   return (
     <div className="fixed inset-0 bg-black text-green-400 font-mono text-lg flex flex-col justify-center px-8 z-50">
       {lines.map((line, idx) => (
-        <div key={idx} className="animate-fadeIn">
-          {line}
-        </div>
+        <div key={idx}>{line}</div>
       ))}
+      {currentLine < bootText.length && (
+        <div>
+          {displayedText}
+          <span className="cursor">_</span>
+        </div>
+      )}
       <style>{`
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-in forwards;
+        .cursor {
+          display: inline-block;
+          width: 8px;
+          background: currentColor;
+          animation: blink 0.8s infinite;
         }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+        @keyframes blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
         }
       `}</style>
     </div>
@@ -121,14 +125,19 @@ const Preloader = ({ onFinish }: { onFinish: () => void }) => {
 const Hero = () => {
   const [loading, setLoading] = useState(true);
 
-  // Animated Role Logic
-  const roles = [ "App Developer","Web Developer", "Full Stack Developer","Cybersecurity Enthusiast", ];
+  const roles = [
+    "App Developer",
+    "Web Developer",
+    "Full Stack Developer",
+    "Cybersecurity Enthusiast",
+  ];
   const [roleIndex, setRoleIndex] = useState(1);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2000); // Switch every 2s
+    const interval = setInterval(
+      () => setRoleIndex((prev) => (prev + 1) % roles.length),
+      2000
+    );
     return () => clearInterval(interval);
   }, []);
 
@@ -136,15 +145,13 @@ const Hero = () => {
     <>
       {loading && <Preloader onFinish={() => setLoading(false)} />}
       {!loading && (
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden">
-          {/* Premium background effect */}
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden pt-20">
           <div className="absolute inset-0 z-10 overflow-hidden">
             <div className="premium-bg-effect"></div>
           </div>
-          {/* Background floating particles */}
           <HackerParticles />
 
-          <div className="relative z-20 container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center justify-center gap-12">
+          <div className="relative z-20 container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
             {/* Left: Profile Image */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -152,7 +159,7 @@ const Hero = () => {
               transition={{ duration: 1 }}
               className="flex-1 flex justify-center"
             >
-              <div className="relative w-[420px] h-[420px] sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] rounded-xl overflow-hidden premium-container">
+              <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-xl overflow-hidden premium-container">
                 <div className="absolute inset-0 premium-border"></div>
                 <img
                   src="/pic-removebg-preview copy.png"
@@ -162,7 +169,6 @@ const Hero = () => {
               </div>
             </motion.div>
 
-
             {/* Right: Text Content */}
             <motion.div
               initial={{ opacity: 0, x: 40 }}
@@ -170,9 +176,7 @@ const Hero = () => {
               transition={{ duration: 1 }}
               className="flex-1 text-center lg:text-left"
             >
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4"
-              >
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
                 <span className="premium-glitch" data-text="Nitish Modi">
                   <span className="premium-glitch-text">Nitish Modi</span>
                   <span className="premium-glitch-layer"></span>
@@ -180,7 +184,6 @@ const Hero = () => {
                 </span>
               </h1>
 
-              {/* Role with Enhanced Animation */}
               <div className="role-container mb-6">
                 <p
                   key={roleIndex}
@@ -192,56 +195,73 @@ const Hero = () => {
               </div>
 
               <p className="premium-description max-w-lg mx-auto lg:mx-0 mb-8">
-                Building secure, high-performance systems with a hacker's
-                precision. I blend development expertise with deep cybersecurity
-                insight to craft extraordinary digital experiences.
+                I build fast and secure systems by blending strong coding skills
+                with a hacker’s mindset. With expertise in both development and
+                cybersecurity, I create digital solutions that perform smoothly,
+                stay protected, and deliver an exceptional user experience.
               </p>
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-6">
-                <a
-                  href="#projects"
-                  className="premium-button green-button"
-                >
+                <a href="#projects" className="premium-button green-button">
                   <span className="button-text">View Projects</span>
                   <span className="button-glow"></span>
                 </a>
-                <a
-                  href="#contact"
-                  className="premium-button purple-button"
-                >
+                <a href="#contact" className="premium-button purple-button">
                   <span className="button-text">Contact</span>
                   <span className="button-glow"></span>
                 </a>
               </div>
 
               <div className="flex justify-center lg:justify-start gap-6 mt-8">
-                <a href="https://github.com/technitishmodi" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                <a
+                  href="https://github.com/technitishmodi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon-link"
+                >
                   <div className="social-icon-container">
                     <Github className="social-icon" />
                   </div>
                 </a>
-                <a href="https://www.linkedin.com/in/nitish-modi-206205294" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                <a
+                  href="https://www.linkedin.com/in/nitish-modi-206205294"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon-link"
+                >
                   <div className="social-icon-container">
                     <Linkedin className="social-icon" />
                   </div>
                 </a>
-                <a href="https://www.instagram.com/nitishmodi21" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                <a
+                  href="https://www.instagram.com/nitishmodi21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon-link"
+                >
                   <div className="social-icon-container">
                     <Instagram className="social-icon" />
                   </div>
                 </a>
-                <a href="https://wa.me/918434997573" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                <a
+                  href="https://wa.me/918434997573"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon-link"
+                >
                   <div className="social-icon-container">
                     <Phone className="social-icon" />
                   </div>
                 </a>
-                <a href="mailto:nubhawbarnwal@gmail.com" className="social-icon-link">
+                <a
+                  href="mailto:nubhawbarnwal@gmail.com"
+                  className="social-icon-link"
+                >
                   <div className="social-icon-container">
                     <Mail className="social-icon" />
                   </div>
                 </a>
               </div>
-
             </motion.div>
           </div>
 

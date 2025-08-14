@@ -29,16 +29,18 @@ const Contact: React.FC = () => {
 
     try {
       const result = await emailjs.send(
-        'service_lj2npbe',  // 🔹 Replace with EmailJS Service ID
-        'template_bxgz5gb', // 🔹 Replace with EmailJS Template ID
-        {
-          from_name: formState.name,
-          from_email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-        },
-        '4DAs07vSYMEz2vAvM'   // 🔹 Replace with EmailJS Public Key
-      );
+  'service_t30bt84',
+  'template_a8jl1am',
+  {
+    name: formState.name, // matches {{name}}
+    email: formState.email, // matches {{email}}
+    title: formState.subject, // matches {{title}}
+    time: new Date().toLocaleString(), // matches {{time}}
+    message: formState.message // matches {{message}}
+  },
+  'HDF-3Uex3PeSEBz2C'
+);
+
 
       console.log('Email sent successfully:', result.text);
       setIsSubmitting(false);

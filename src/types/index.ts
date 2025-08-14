@@ -6,6 +6,7 @@ export interface Project {
   category: string;
   tags: string[];
   link: string;
+  details: string[];
 }
 
 export interface Skill {

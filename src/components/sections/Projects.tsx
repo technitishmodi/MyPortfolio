@@ -205,10 +205,9 @@ const Projects: React.FC = () => {
                     Project Details
                   </h3>
                   <div className="space-y-3 text-gray-600 dark:text-gray-400">
-                    <p>• Built with modern development practices and clean architecture</p>
-                    <p>• Responsive design optimized for all devices</p>
-                    <p>• Focus on user experience and performance</p>
-                    <p>• Implemented security best practices</p>
+                    {selectedProject.details?.map((detail: string, index: number) => (
+                      <p key={index}>{detail}</p>
+                    ))}
                   </div>
                 </div>
 
