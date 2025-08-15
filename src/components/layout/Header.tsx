@@ -43,10 +43,50 @@ const Header: React.FC = () => {
         <nav className="flex items-center justify-between">
           <motion.a 
             href="#home" 
-            className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent"
+            className="flex items-center"
             whileHover={{ scale: 1.05 }}
           >
-            Portfolio
+            <div className="relative group">
+              {/* Outer glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+              
+              {/* Main logo container */}
+              <div className="relative w-14 h-14 bg-black border border-cyan-400/50 rounded-lg flex items-center justify-center overflow-hidden">
+                {/* Cyberpunk grid background */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-purple-500/10"></div>
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent"></div>
+                  <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent"></div>
+                  <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-purple-500/30 to-transparent"></div>
+                </div>
+                
+                {/* Glitch effect bars */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div className="absolute top-2 left-0 w-full h-px bg-cyan-400 animate-pulse"></div>
+                  <div className="absolute bottom-3 left-0 w-full h-px bg-pink-500 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                </div>
+                
+                {/* NM Text with cyberpunk styling */}
+                <div className="relative z-10 flex items-center justify-center">
+                  <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-400 tracking-wider filter drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">
+                    N
+                  </span>
+                  <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 tracking-wider filter drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" style={{ marginLeft: '-2px' }}>
+                    M
+                  </span>
+                </div>
+                
+                {/* Corner accent dots */}
+                <div className="absolute top-1 right-1 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                <div className="absolute bottom-1 left-1 w-1 h-1 bg-pink-500 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+                
+                {/* Scanning line effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100">
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse transform translate-y-0 group-hover:translate-y-14 transition-transform duration-2000"></div>
+                </div>
+              </div>
+            </div>
           </motion.a>
 
           <div className="hidden md:flex items-center space-x-8">

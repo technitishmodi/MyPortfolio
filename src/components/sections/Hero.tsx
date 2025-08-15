@@ -145,7 +145,7 @@ const Hero = () => {
     <>
       {loading && <Preloader onFinish={() => setLoading(false)} />}
       {!loading && (
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden pt-20">
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden pt-32 sm:pt-28 md:pt-24 lg:pt-20">
           <div className="absolute inset-0 z-10 overflow-hidden">
             <div className="premium-bg-effect"></div>
           </div>

@@ -17,16 +17,22 @@ export const skills: Skill[] = [
 
   // Frontend Development
   {
-    name: 'React',
-    icon: 'layout',
+    name: 'HTML',
+    icon: 'codepen', // Represents coding / markup
     level: 90,
-    description: 'Interactive, high-performance UIs using modern React patterns.'
+    description: 'Markup language for structuring and presenting web content.'
   },
   {
-    name: 'Next.js',
-    icon: 'layers',
-    level: 85,
-    description: 'Full-stack React framework with SSR and API routes.'
+    name: 'JavaScript',
+    icon: 'code', // Represents programming
+    level: 90,
+    description: 'Versatile scripting language for dynamic and interactive web pages.'
+  },
+  {
+    name: 'React',
+    icon: 'zap', // Represents speed & interactivity
+    level: 90,
+    description: 'JavaScript library for building fast, interactive user interfaces.'
   },
   {
     name: 'Tailwind CSS',
@@ -42,12 +48,12 @@ export const skills: Skill[] = [
     level: 85,
     description: 'Fast, event-driven backend applications.'
   },
-  {
-    name: 'Express.js',
-    icon: 'route',
-    level: 80,
-    description: 'Lightweight and flexible Node.js web framework.'
-  },
+  // {
+  //   name: 'Express.js',
+  //   icon: 'route',
+  //   level: 80,
+  //   description: 'Lightweight and flexible Node.js web framework.'
+  // },
   {
     name: 'REST API',
     icon: 'cloud',
@@ -119,5 +125,41 @@ export const skills: Skill[] = [
     icon: 'shield-alert',
     level: 75,
     description: 'Web app security aligned with OWASP standards.'
-  }
+  },
+  {
+    name: 'Metasploit Framework',
+    icon: 'terminal',
+    level: 78,
+    description: 'Exploitation and vulnerability assessment using Metasploit.'
+  },
+  {
+    name: 'Dark Web Intelligence',
+    icon: 'eye-off',
+    level: 70,
+    description: 'Monitoring and gathering intelligence from the dark web.'
+  },
+  {
+    name: 'Digital Forensics',
+    icon: 'search',
+    level: 72,
+    description: 'Investigating cyber incidents and analyzing digital evidence.'
+  },
+  {
+    name: 'Ethical Hacking',
+    icon: 'target',
+    level: 85,
+    description: 'Offensive security techniques to identify system vulnerabilities.'
+  },
+  {
+    name: 'Incident Response',
+    icon: 'alert-triangle',
+    level: 78,
+    description: 'Rapid identification and mitigation of security breaches.'
+  },
+  {
+    name: 'Malware Analysis',
+    icon: 'bug',
+    level: 74,
+    description: 'Reverse-engineering and studying malicious software.'
+  },
 ];
