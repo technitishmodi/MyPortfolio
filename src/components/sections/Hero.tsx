@@ -59,71 +59,8 @@ const HackerParticles = () => {
   );
 };
 
-// Boot-up Preloader (Hacker Terminal Style)
-const Preloader = ({ onFinish }: { onFinish: () => void }) => {
-  const bootText = [
-    "> Connecting securely...",
-    "> Decrypting access keys...",
-    "> Loading skills and projects...",
-    "> Security check passed.",
-    "> Access granted.",
-  ];
-
-  const [currentLine, setCurrentLine] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [lines, setLines] = useState<string[]>([]);
-
-  useEffect(() => {
-    let charIndex = 0;
-
-    const typeLine = () => {
-      if (charIndex < bootText[currentLine].length) {
-        setDisplayedText((prev) => prev + bootText[currentLine][charIndex]);
-        charIndex++;
-        setTimeout(typeLine, 40);
-      } else {
-        setLines((prev) => [...prev, bootText[currentLine]]);
-        setDisplayedText("");
-        setCurrentLine((prev) => prev + 1);
-      }
-    };
-
-    if (currentLine < bootText.length) {
-      setTimeout(typeLine, 500);
-    } else {
-      setTimeout(() => onFinish(), 800);
-    }
-  }, [currentLine]);
-
-  return (
-    <div className="fixed inset-0 bg-black text-green-400 font-mono text-lg flex flex-col justify-center px-8 z-50">
-      {lines.map((line, idx) => (
-        <div key={idx}>{line}</div>
-      ))}
-      {currentLine < bootText.length && (
-        <div>
-          {displayedText}
-          <span className="cursor">_</span>
-        </div>
-      )}
-      <style>{`
-        .cursor {
-          display: inline-block;
-          width: 8px;
-          background: currentColor;
-          animation: blink 0.8s infinite;
-        }
-        @keyframes blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-      `}</style>
-    </div>
-  );
-};
 
 const Hero = () => {
-  const [loading, setLoading] = useState(true);
 
   const roles = [
     "App Developer",
@@ -142,10 +79,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <>
-      {loading && <Preloader onFinish={() => setLoading(false)} />}
-      {!loading && (
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden pt-32 sm:pt-28 md:pt-24 lg:pt-20">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden pt-32 sm:pt-28 md:pt-24 lg:pt-20">
           <div className="absolute inset-0 z-10 overflow-hidden">
             <div className="premium-bg-effect"></div>
           </div>
@@ -625,9 +559,7 @@ const Hero = () => {
                 100% { transform: rotate(360deg); }
               }
           `}</style>
-        </section>
-      )}
-    </>
+    </section>
   );
 };
 

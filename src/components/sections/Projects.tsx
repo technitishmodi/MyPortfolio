@@ -104,13 +104,13 @@ const Projects: React.FC = () => {
                     >
                       <ExternalLink size={14} />
                     </a>
-                    <a
+                    {/* <a
                       href="#"
                       className="p-2 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
                       aria-label="View source code"
                     >
                       <Github size={14} />
-                    </a>
+                    </a> */}
                   </div>
                 </div>
                 
